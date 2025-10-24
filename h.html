@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+.pricing {
+width: 300px;
+margin: auto;
+background-color: #fff;
+box-shadow: 0 0 10px #ccc;
+padding: 10px;
+text-align: left;
+}
+
+.title {
+font-size: 22px;
+font-weight: bold;
+}
+
+.price {
+font-size: 18px;
+color: green;
+}
+
+.features {
+list-style: none;
+padding-left: 0;
+}
+
+.features li {
+padding: 4px;
+border-bottom: 1px solid #eee;
+}
+
+.btn {
+background: blue;
+color: white;
+padding: 10px 20px;
+border: none;
+margin-top: 10px;
+}
+
+.btn:hover {
+background: darkblue;
+}
+
+.cards-container {
+display: flex;
+gap: 20px;
+justify-content: center;
+flex-wrap: wrap;
+margin: 20px;
+}
+</style>
+</head>
+<body>
+
+<div id="cards-container" class="cards-container">
+<!-- Cards will be rendered here by JavaScript -->
+</div>
+
+<script>
+class PricingCard {
+    constructor(title, price, features, buttonText = "Start Trial") {
+        this.title = title;
+        this.price = price;
+        this.features = features;
+        this.buttonText = buttonText;
+    }
+
+    render() {
+        const featuresList = this.features.map(feature => `<li>${feature}</li>`).join('');
+        
+        return `
+            <div class="pricing">
+                <h2 class="title">${this.title}</h2>
+                <p class="price">${this.price}</p>
+                <ul class="features">
+                    ${featuresList}
+                </ul>
+                <button class="btn">${this.buttonText}</button>
+            </div>
+        `;
+    }
+}
+
+// Create multiple pricing cards
+const basicCard = new PricingCard(
+    "Basic Plan",
+    "$9.99 /month",
+    ["1 GB Storage", "Basic Support", "All Core Features"]
+);
+
+const proCard = new PricingCard(
+    "Pro Plan",
+    "$19.99 /month",
+    ["10 GB Storage", "Priority Support", "Advanced Features", "API Access"]
+);
+
+const enterpriseCard = new PricingCard(
+    "Enterprise Plan",
+    "$49.99 /month",
+    ["Unlimited Storage", "24/7 Support", "All Features", "Custom Integration", "Dedicated Manager"]
+);
+
+// Render all cards
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('cards-container');
+    container.innerHTML = basicCard.render() + proCard.render() + enterpriseCard.render();
+});
+</script>
+
+</body>
+</html>
+
+
